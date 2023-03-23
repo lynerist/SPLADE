@@ -1,0 +1,30 @@
+feature possibili:
+	
+	frequency:
+
+	--MFCCs (speach) (DONE)
+	--Spectral Centroid (DONE)
+	- Spectral flatness 
+	--Chroma features
+	- Formant frequencies ??
+	--Spectral entropy ??
+	--Spectral flux ??
+	--Spectral rolloff
+	--Periodicity estimation/Harmonic ratio(HR)??
+	
+	tempo:
+	--Zero Crossing Rate
+	--Energy entropy ??
+
+
+
+CLASSIFICATORE A:
+-MFCCs
+
+CLASSIFICATORE B:
+-MFCCs 
+-Chroma features
+
+CLASSIFICATORE C:
+-Spectral flux
+-Zero crossing rate
