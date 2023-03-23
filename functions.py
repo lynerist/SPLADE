@@ -2,12 +2,14 @@ from pyAudioAnalysis import ShortTermFeatures as stf
 from pyAudioAnalysis.audioBasicIO import read_audio_file as read
 
 LANGUAGES = "af ar bg bn bo cs da de el en".split()
+LANGUAGES_COMPLETE = {abbreviation:name for abbreviation, name in zip(LANGUAGES, \
+"Afrikaans Arabic Bulgarian Bengali Tibetan Czech Danish German Greek English".split())}
 
 #TODO CAPIRE PERCHé I FILE INIZIANO CON 0.0 0.0 0.0 etc.
 
 class ARFF:
 	def __init__(self, name):
-		self.storedFeatures = []
+		self.__storedFeatures = []
 		self.outputFile = open(f"{name}.arff", "w")
 		self.outputFile.write(self.headingARFF())
 
@@ -21,13 +23,18 @@ class ARFF:
 				"\n\n@data\n"
 	
 	def storeAudioFeatures(self, audioLanguage, songNumber, features, featuresNames):
-		self.storedFeatures.append("\n".join([f"{audioLanguage}_{songNumber}_{frame},{audioLanguage}," +\
+		self.__storedFeatures.append("\n".join([f"{audioLanguage}_{songNumber}_{frame},{audioLanguage}," +\
 								",".join([f'{features[feature][frame]}' \
 									for feature in range(len(featuresNames))])\
 										for frame in range(len(features[0]))])+"\n")
 
+	def freeStoredFeatures():
+		self.__storedFeatures = []
+
 	def exportARFF(self):
-		self.outputFile.write("".join(self.storedFeatures))
+		self.outputFile.write("".join(self.__storedFeatures))
+		freeStoredFeatures()
+				
 
 if __name__ == "__main__":
 	inizializeARFF(["a","b","c"])
