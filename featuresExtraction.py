@@ -5,11 +5,10 @@ from os import listdir
 
 arff = ARFF("treLingue")
 
-FRAME_DIMENSION = 3000
-FRAME_STEP = 1500
+FRAME_DIMENSION = 4000
+FRAME_STEP = 2000
 
-STEP_PRINT = 50
-LIMIT = 1500
+LIMIT = 3000
 
 for audioLanguage in [LANGUAGES[i] for i in range(3)]:	
 	print(LANGUAGES_COMPLETE[audioLanguage], end=" ")	
@@ -23,6 +22,6 @@ for audioLanguage in [LANGUAGES[i] for i in range(3)]:
 		if index%(LIMIT/10)==0: print(int(100*index/LIMIT), end=" / ")
 		if index >LIMIT: break
 	print()
+	arff.exportARFF()
 	
 
-arff.exportARFF()
