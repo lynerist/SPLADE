@@ -9,6 +9,7 @@ from os import path, mkdir
 LANGUAGES = "af ar bg bn bo cs da de el en".split()
 LANGUAGES_COMPLETE = {abbreviation:name for abbreviation, name in zip(LANGUAGES, \
 "Afrikaans Arabic Bulgarian Bengali Tibetan Czech Danish German Greek English".split())}
+SAMPLE_FREQUENCY = 16000
 
 #TODO CAPIRE PERCHé I FILE INIZIANO CON 0.0 0.0 0.0 etc.
 
@@ -22,7 +23,7 @@ class ARFF:
 		self.closeFile()
 
 	def headingARFF(self):
-		sf, fooAudio = read("dataset/af/_0nH46-zSA0__U__S27---0222.650-0227.830.wav")
+		sf, fooAudio = read("dataset/af/0.wav")
 		f, featuresNames = stf.feature_extraction(fooAudio, sf, 1000, 500)
 
 		return	f"@relation audio\n\n@attribute name string\n" + \
@@ -52,24 +53,36 @@ class ARFF:
 		self.__outputFile.close()
 
 
+class Logger:
+	def __init__(self, function, logStep=100):
+		self.__logCount = 0	
+		self.wrapped = function
+		self.logStep = logStep
 
-def trimSilences(audioPath):
-	sampling_rate, signal = read(audioPath)
-	segmentLimits = silence_removal(signal, sampling_rate, 0.05, 0.05)
-
-	outputPath, name = "/".join(audioPath.split("/")[:-1]) + "/trimmed/", audioPath.split("/")[-1]
-
-	finalSignal = signal[0:1]
-	
-	for i, s in enumerate(segmentLimits):
-		finalSignal = concatenate([finalSignal, signal[int(sampling_rate * s[0]):int(sampling_rate * s[1])]])
-		print(finalSignal)
+	def __call__(self, *args):
+		self.__logCount += 1
+		if self.__logCount % self.logStep == 0:
+			print(self.__logCount, end=" /")
+		return self.wrapped(*args)
 		
-	if not path.exists(outputPath):
-		mkdir(outputPath)
 
-	wavfile.write(outputPath+name, sampling_rate, finalSignal)
-	return finalSignal
+def trimSilences(sampling_rate, signalIn):
+	segmentLimits = silence_removal(signalIn, sampling_rate, 0.05, 0.05)
+
+	signalOut = concatenate([signalIn[int(sampling_rate * s[0]):int(sampling_rate * s[1])] \
+								for i, s in enumerate(segmentLimits)]) if segmentLimits else []			
+	return signalOut
 
 if __name__ == "__main__":
-	trimSilences("dataset/af/__test.wav")
+	# audioPath = "dataset/af/__test.wav"
+	# sampling_rate, signal = read(audioPath)
+
+	# outputPath, name = "/".join(audioPath.split("/")[:-1]) + "/trimmed/", audioPath.split("/")[-1]
+	# if not path.exists(outputPath):
+	# 	mkdir(outputPath)
+
+	# wavfile.write(outputPath+name, sampling_rate, trimSilences(sampling_rate, signal))
+
+	audioPath = "dataset/af/zzvHKmkFzeQ__U__S55---0634.630-0643.790.wav"
+	sampling_rate, signal = read(audioPath)
+	print(signal)
