@@ -26,4 +26,4 @@ def aggregateLanguage(language):
 		
 
 if __name__ == "__main__":
-	aggregateLanguage("bg")
+	aggregateLanguage("try")

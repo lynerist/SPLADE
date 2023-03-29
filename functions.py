@@ -13,6 +13,9 @@ SAMPLE_FREQUENCY = 16000
 
 #TODO CAPIRE PERCHé I FILE INIZIANO CON 0.0 0.0 0.0 etc.
 
+with open("features.txt") as f:
+	FEATURES = [feature[:-1] for feature in f.readlines()]
+
 class ARFF:
 	def __init__(self, name):
 		self.__storedFeatures = []
@@ -24,17 +27,16 @@ class ARFF:
 
 	def headingARFF(self):
 		sf, fooAudio = read("dataset/af/0.wav")
-		f, featuresNames = stf.feature_extraction(fooAudio, sf, 1000, 500)
-
-		return	f"@relation audio\n\n@attribute name string\n" + \
+		
+		return	f"@relation audio\n\n" + \
 				"@attribute language {" + ', '.join(LANGUAGES) + "}\n" + \
-				"\n".join([f'@attribute {n.replace(" ", "_")} real' for n in featuresNames]) + \
+				"\n".join([f'@attribute {n.replace(" ", "_")} real' for n in FEATURES]) + \
 				"\n\n@data\n"
 	
-	def storeAudioFeatures(self, audioLanguage, songNumber, features, featuresNames):
-		self.__storedFeatures.append("\n".join([f"{audioLanguage}_{songNumber}_{frame},{audioLanguage}," +\
-								",".join([f'{features[feature][frame]}' \
-									for feature in range(len(featuresNames))])\
+	def storeAudioFeatures(self, audioLanguage, songNumber, features):
+		#self.__storedFeatures.append("\n".join([f"{audioLanguage}_{songNumber}_{frame},{audioLanguage}," +\
+		self.__storedFeatures.append("\n".join([f"{audioLanguage},"+",".join([f'{features[feature][frame]}' \
+									for feature in range(len(FEATURES))])\
 										for frame in range(len(features[0]))])+"\n")
 
 	def freeStoredFeatures(self):
@@ -51,7 +53,6 @@ class ARFF:
 
 	def closeFile(self):
 		self.__outputFile.close()
-
 
 class Logger:
 	def __init__(self, function, logStep=100):
