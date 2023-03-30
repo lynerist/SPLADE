@@ -6,9 +6,12 @@ from numpy import array
 from numpy import concatenate
 from os import path, mkdir
 
-LANGUAGES = "af ar bg bn bo cs da de el en".split()
-LANGUAGES_COMPLETE = {abbreviation:name for abbreviation, name in zip(LANGUAGES, \
-"Afrikaans Arabic Bulgarian Bengali Tibetan Czech Danish German Greek English".split())}
+with open("languages.txt") as f:
+	lines = [line[:-1].split() for line in f.readlines()]
+	LANGUAGES = [acronymAndLanguage[0] for acronymAndLanguage in lines]
+	LANGUAGES_COMPLETE = {acronymAndLanguage[0]:acronymAndLanguage[1] for acronymAndLanguage in lines}
+
+
 SAMPLE_FREQUENCY = 16000
 
 #TODO CAPIRE PERCHé I FILE INIZIANO CON 0.0 0.0 0.0 etc.

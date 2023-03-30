@@ -1,0 +1,10 @@
+af Afrikaans
+ar Arabic
+bg Bulgarian
+bn Bengali
+bo Tibetan
+cs Czech
+da Danish
+de German
+el Greek
+en English
