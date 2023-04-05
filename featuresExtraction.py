@@ -3,27 +3,25 @@ from pyAudioAnalysis.audioBasicIO import read_audio_file as read
 from functions import *
 from os import listdir
 
-arff = ARFF("fiveLanguages")
+arff = ARFF("eigthLanguages")
 
-FRAME_DIMENSION = 1000
-FRAME_STEP = 500
+FRAME_DIMENSION = 5000
+FRAME_STEP = 4000
 
-for audioLanguage in [LANGUAGES[i] for i in range(5)]:	
+for audioLanguage in LANGUAGES:	
 	print(LANGUAGES_COMPLETE[audioLanguage], end=" ")	
 	languagePath = f"dataset/{audioLanguage}/"
 	for index, audioName in enumerate(listdir(languagePath)):
 		sf, audio = read(languagePath+audioName)
 		extractedFeatures, extractedFeaturesNames = stf.feature_extraction(audio, sf, FRAME_DIMENSION, FRAME_STEP)
-		# extractedFeatures = [[feature for i, feature in enumerate(frame) \
-		# 									if extractedFeaturesNames[i] in FEATURES]\
-		# 										for frame in extractedFeatures]
-		extractedFeatures = [feature for i,feature in enumerate(extractedFeatures)\
+
+		selectedFeatures = [feature for i,feature in enumerate(extractedFeatures)\
 														if extractedFeaturesNames[i] in FEATURES]
 
-		arff.storeAudioFeatures(audioLanguage, index, extractedFeatures)
+		arff.storeAudioFeatures(audioLanguage, index, selectedFeatures)
 
 		if index%5==0: print(index, end=" / ")
-		if index>12: break
+		#if index>12: break
 
 	print()
 	arff.exportARFF()
