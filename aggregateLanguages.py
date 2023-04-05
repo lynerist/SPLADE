@@ -1,8 +1,8 @@
 from functions import *
 from os import listdir
+from numpy import int16
 from os import path, mkdir
 from pyAudioAnalysis.audioBasicIO import read_audio_file as read
-
 
 def aggregateLanguage(language):
 	languagePath = f"dataset/{language}/"
@@ -12,7 +12,7 @@ def aggregateLanguage(language):
 
 	loggedTrimSilences = Logger(trimSilences)
 
-	languageBlock = concatenate([loggedTrimSilences(*read(languagePath+audioName))\
+	languageBlock = concatenate([loggedTrimSilences(*read(languagePath+audioName),audioName )\
 								for audioName in listdir(languagePath)])
 
 	chunkIndex = 0
@@ -23,7 +23,5 @@ def aggregateLanguage(language):
 								min((chunkIndex+1)*FIVE_MINUTES_SAMPLES, len(languageBlock))])
 		chunkIndex+=1
 
-		
-
 if __name__ == "__main__":
-	aggregateLanguage("bo")
+	aggregateLanguage("en")
