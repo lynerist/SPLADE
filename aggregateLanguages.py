@@ -24,4 +24,4 @@ def aggregateLanguage(language):
 		chunkIndex+=1
 
 if __name__ == "__main__":
-	aggregateLanguage("en")
+	aggregateLanguage("ja")

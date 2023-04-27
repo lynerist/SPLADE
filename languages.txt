@@ -6,3 +6,5 @@ bo Tibetan
 de German
 el Greek
 en English
+it Italian
+ja Japanese

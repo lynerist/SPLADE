@@ -3,10 +3,10 @@ from pyAudioAnalysis.audioBasicIO import read_audio_file as read
 from functions import *
 from os import listdir
 
-arff = ARFF("eigthLanguages")
+arff = ARFF("threeLanguages")
 
-FRAME_DIMENSION = 5000
-FRAME_STEP = 4000
+FRAME_DIMENSION = 2 * SAMPLE_FREQUENCY
+FRAME_STEP = 1 * SAMPLE_FREQUENCY
 
 for audioLanguage in LANGUAGES:	
 	print(LANGUAGES_COMPLETE[audioLanguage], end=" ")	
