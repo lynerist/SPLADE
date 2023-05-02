@@ -24,7 +24,7 @@ class ARFF:
 		self.__storedFeatures = []
 		self.name = name
 		
-		self.__outputFile = open(f"{self.name}.arff", "w")
+		self.__outputFile = open(f"arff/{self.name}.arff", "w")
 		self.__outputFile.write(self.headingARFF())
 		self.closeFile()
 
@@ -52,7 +52,7 @@ class ARFF:
 		self.closeFile()
 
 	def openFile(self):
-		self.__outputFile = open(f"{self.name}.arff", "a")
+		self.__outputFile = open(f"arff/{self.name}.arff", "a")
 
 	def closeFile(self):
 		self.__outputFile.close()

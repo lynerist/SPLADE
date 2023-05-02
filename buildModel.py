@@ -5,7 +5,7 @@ import sklearn
 import arff
 
 # Carica il file arff
-with open('tenLanguages.arff', 'r') as file:
+with open('arff/tenLanguages.arff', 'r') as file:
     data = arff.load(file)
 
 features = [row[1:] for row in data['data']]
