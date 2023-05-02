@@ -1,10 +1,8 @@
 zcr
-energy
 energy_entropy
 spectral_centroid
 spectral_spread
 spectral_entropy
-spectral_flux
 spectral_rolloff
 mfcc_1
 mfcc_2
