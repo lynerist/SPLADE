@@ -8,10 +8,9 @@ import (
 )
 
 func main(){
-	file, _ := os.Open("classificationLibLinear.txt")
+	file, _ := os.Open("classifications/classificationLibLinear.txt")
 	sc := bufio.NewScanner(file)
 
-	
 	currentClassification := make(map[string]int)
 	var countRight int
 	var countTot int
@@ -30,11 +29,13 @@ func main(){
 					maxLab = k
 				}
 			}
-			fmt.Printf("The label should be %s, it was %s\n", line[1], maxLab)
+			fmt.Printf("The label should be %s, it was %s", line[1], maxLab)
 
 			if line[1] == maxLab{
+				fmt.Print("  --------------------------------------- ")
 				countRight++
 			}
+			fmt.Println()
 			countTot++
 
 			currentClassification = make(map[string]int)

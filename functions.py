@@ -37,7 +37,6 @@ class ARFF:
 				"\n\n@data\n"
 	
 	def storeAudioFeatures(self, audioLanguage, songNumber, features):
-		#self.__storedFeatures.append("\n".join([f"{audioLanguage}_{songNumber}_{frame},{audioLanguage}," +\
 		self.__storedFeatures.append("\n".join([f"{audioLanguage},"+",".join([f'{features[feature][frame]}' \
 									for feature in range(len(FEATURES))])\
 										for frame in range(len(features[0]))])+"\n")

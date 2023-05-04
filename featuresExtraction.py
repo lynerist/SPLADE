@@ -6,7 +6,7 @@ from os import listdir
 TRAIN = False
 TEST = True
 
-arff = ARFF("arff/tenLanguages" + (TRAIN and "TRAIN" or TEST and "TEST" or ""))
+arff = ARFF("tenLanguages" + (TRAIN and "TRAIN" or TEST and "TEST" or ""))
 firstAudio = TEST and 50 or 0
 LastAudio = TRAIN and 50 or 61
 

@@ -1,4 +1,7 @@
 /dataset/
+/classifications/
+/arff/
+/appunti/
 /__pycache/
 /*.arff
 /*-model
