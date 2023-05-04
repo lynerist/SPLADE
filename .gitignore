@@ -1,8 +1,6 @@
 /dataset/
 /classifications/
-/arff/
 /appunti/
 /__pycache/
-/*.arff
 /*-model
 /__pycache__
