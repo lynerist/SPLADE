@@ -7,12 +7,12 @@ from numpy import concatenate
 from os import path, mkdir
 from numpy import int16
 
-with open("languages.txt") as f:
+with open("parameters/languages.txt") as f:
 	lines = [line[:-1].split() for line in f.readlines()]
 	LANGUAGES = [acronymAndLanguage[0] for acronymAndLanguage in lines]
 	LANGUAGES_COMPLETE = {acronymAndLanguage[0]:acronymAndLanguage[1] for acronymAndLanguage in lines}
 
-with open("features.txt") as f:
+with open("parameters/features.txt") as f:
 	FEATURES = [feature[:-1] for feature in f.readlines()]
 
 SAMPLE_FREQUENCY = 16000
